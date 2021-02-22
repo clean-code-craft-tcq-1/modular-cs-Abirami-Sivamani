@@ -38,9 +38,7 @@ namespace TelCo.ColorCoder
             if (pairNumber < 1 || pairNumber > (colorMapMinor.Length) * (colorMapMajor.Length))
                 throw new ArgumentOutOfRangeException(string.Format("Argument PairNumber:{0} is outside the allowed range", pairNumber));
     
-            int zeroBasedPairNumber = pairNumber - 1;
-            int majorIndex = zeroBasedPairNumber / colorMapMinor.Length;
-            int minorIndex = zeroBasedPairNumber % colorMapMinor.Length;
+            int zeroBasedPairNumber = pairNumber - 1, majorIndex = zeroBasedPairNumber / colorMapMinor.Length, minorIndex = zeroBasedPairNumber % colorMapMinor.Length;
             return new ColorPair() { majorColor = colorMapMajor[majorIndex], minorColor = colorMapMinor[minorIndex] };
         }
         
