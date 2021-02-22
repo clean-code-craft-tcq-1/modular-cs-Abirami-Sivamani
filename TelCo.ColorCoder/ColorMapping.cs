@@ -1,12 +1,9 @@
 using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Text;
 
 namespace TelCo.ColorCoder
 {
     /// <summary>
-    /// The 25-pair color code, originally known as even-count color code, is a color code used to identify individual conductors in twisted-pair wiring for telecommunications.
     /// This class provides the color coding and mapping of pair number to color and color to pair number.
     /// </summary>
     class ColorMapping
@@ -45,19 +42,14 @@ namespace TelCo.ColorCoder
         public ColorPair GetColorFromPairNumber(int pairNumber)
         {
             // The function supports only 1 based index. Pair numbers valid are from 1 to 25
-            int minorSize = colorMapMinor.Length;
-            int majorSize = colorMapMajor.Length;
-            if (pairNumber < 1 || pairNumber > minorSize * majorSize)
+            if (pairNumber < 1 || pairNumber > (colorMapMinor.Length) * (colorMapMajor.Length))
             {
                 throw new ArgumentOutOfRangeException(
                     string.Format("Argument PairNumber:{0} is outside the allowed range", pairNumber));
             }
-
-            // Find index of major and minor color from pair number
             int zeroBasedPairNumber = pairNumber - 1;
-            int majorIndex = zeroBasedPairNumber / minorSize;
-            int minorIndex = zeroBasedPairNumber % minorSize;
-
+            int majorIndex = zeroBasedPairNumber / colorMapMinor.Length;
+            int minorIndex = zeroBasedPairNumber % colorMapMinor.Length;
             ColorPair pair = new ColorPair() { majorColor = colorMapMajor[majorIndex], minorColor = colorMapMinor[minorIndex] };
             return pair;
         }
@@ -68,7 +60,7 @@ namespace TelCo.ColorCoder
         /// <returns></returns>
         public int GetPairNumberFromColor(ColorPair pair)
         {
-            int majorIndex = -1;
+            int majorIndex = -1, minorIndex = -1;
             for (int i = 0; i < colorMapMajor.Length; i++)
             {
                 if (colorMapMajor[i] == pair.majorColor)
@@ -77,7 +69,6 @@ namespace TelCo.ColorCoder
                     break;
                 }
             }
-            int minorIndex = -1;
             for (int i = 0; i < colorMapMinor.Length; i++)
             {
                 if (colorMapMinor[i] == pair.minorColor)
@@ -87,12 +78,24 @@ namespace TelCo.ColorCoder
                 }
             }
             if (majorIndex == -1 || minorIndex == -1)
-            {
-                throw new ArgumentException(
-                    string.Format("Unknown Colors: {0}", pair.ToString()));
-            }
+                throw new ArgumentException(string.Format("Unknown Colors: {0}", pair.ToString()));
             // (Note: +1 in compute is because pair number is 1 based, not zero)
             return (majorIndex * colorMapMinor.Length) + (minorIndex + 1);
+        }
+        /// <summary>
+        /// Print the Pair number and respective major & minor ColorMap
+        /// </summary>
+        public void PrintColorPairManual()
+        {
+            int pairNumber = 1;
+            for (int i = 0; i < colorMapMajor.Length; i++)
+            {
+                for(int j = 0; j < colorMapMinor.Length; j++)
+                {           
+                    Console.WriteLine("Pair Number: {0}, Colors: {1}\n", pairNumber, new ColorPair() { majorColor = colorMapMajor[i], minorColor = colorMapMinor[j] });
+                    pairNumber++;
+                }
+            }
         }
         #endregion
     }
