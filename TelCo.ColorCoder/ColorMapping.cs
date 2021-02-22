@@ -9,8 +9,7 @@ namespace TelCo.ColorCoder
     class ColorMapping
     {
         #region Private Variables
-        private static Color[] colorMapMajor;
-        private static Color[] colorMapMinor;
+        private static Color[] colorMapMajor, colorMapMinor;
         #endregion
 
         #region Constructor
@@ -34,30 +33,17 @@ namespace TelCo.ColorCoder
         #endregion
 
         #region Methods
-        /// <summary>
-        /// Given a pair number function returns the major and minor colors in that order
-        /// </summary>
-        /// <param name="pairNumber">Pair number of the color to be fetched</param>
-        /// <returns></returns>
         public ColorPair GetColorFromPairNumber(int pairNumber)
         {
             // The function supports only 1 based index. Pair numbers valid are from 1 to 25
             if (pairNumber < 1 || pairNumber > (colorMapMinor.Length) * (colorMapMajor.Length))
-            {
-                throw new ArgumentOutOfRangeException(
-                    string.Format("Argument PairNumber:{0} is outside the allowed range", pairNumber));
-            }
+                throw new ArgumentOutOfRangeException(string.Format("Argument PairNumber:{0} is outside the allowed range", pairNumber));
             int zeroBasedPairNumber = pairNumber - 1;
             int majorIndex = zeroBasedPairNumber / colorMapMinor.Length;
             int minorIndex = zeroBasedPairNumber % colorMapMinor.Length;
             ColorPair pair = new ColorPair() { majorColor = colorMapMajor[majorIndex], minorColor = colorMapMinor[minorIndex] };
             return pair;
         }
-        /// <summary>
-        /// Given the two colors the function returns the pair number corresponding to them
-        /// </summary>
-        /// <param name="pair">Color pair with major and minor color</param>
-        /// <returns></returns>
         public int GetPairNumberFromColor(ColorPair pair)
         {
             int majorIndex = -1, minorIndex = -1;
@@ -82,9 +68,6 @@ namespace TelCo.ColorCoder
             // (Note: +1 in compute is because pair number is 1 based, not zero)
             return (majorIndex * colorMapMinor.Length) + (minorIndex + 1);
         }
-        /// <summary>
-        /// Print the Pair number and respective major & minor ColorMap
-        /// </summary>
         public void PrintColorPairManual()
         {
             int pairNumber = 1;
