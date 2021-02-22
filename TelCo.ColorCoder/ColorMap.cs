@@ -23,8 +23,7 @@ namespace TelCo.ColorCoder
         #region DataType to hold major and minor colors in the color pair
         internal class ColorPair
         {
-            internal Color majorColor;
-            internal Color minorColor;
+            internal Color majorColor, minorColor;
             public override string ToString()
             {
                 return string.Format("MajorColor:{0}, MinorColor:{1}", majorColor.Name, minorColor.Name);
@@ -38,11 +37,13 @@ namespace TelCo.ColorCoder
             // The function supports only 1 based index. Pair numbers valid are from 1 to 25
             if (pairNumber < 1 || pairNumber > (colorMapMinor.Length) * (colorMapMajor.Length))
                 throw new ArgumentOutOfRangeException(string.Format("Argument PairNumber:{0} is outside the allowed range", pairNumber));
+    
             int zeroBasedPairNumber = pairNumber - 1;
             int majorIndex = zeroBasedPairNumber / colorMapMinor.Length;
             int minorIndex = zeroBasedPairNumber % colorMapMinor.Length;
             return new ColorPair() { majorColor = colorMapMajor[majorIndex], minorColor = colorMapMinor[minorIndex] };
         }
+        
         public int GetPairNumberFromColor(ColorPair pair)
         {
             int majorIndex = -1, minorIndex = -1;
@@ -67,6 +68,7 @@ namespace TelCo.ColorCoder
             // (Note: +1 in compute is because pair number is 1 based, not zero)
             return (majorIndex * colorMapMinor.Length) + (minorIndex + 1);
         }
+        
         public void PrintColorPairManual()
         {
             int pairNumber = 1;
