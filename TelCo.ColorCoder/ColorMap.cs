@@ -16,8 +16,7 @@ namespace TelCo.ColorCoder
         #endregion
 
         #region Constructor
-        public ColorMapping()
-        {
+        public ColorMapping() {
             colorMapMajor = new Color[] { Color.White, Color.Red, Color.Black, Color.Yellow, Color.Violet };
             colorMapMinor = new Color[] { Color.Blue, Color.Orange, Color.Green, Color.Brown, Color.SlateGray };
         }
@@ -29,8 +28,7 @@ namespace TelCo.ColorCoder
         internal class ColorPair
         {
             internal Color majorColor, minorColor;
-            public override string ToString()
-            {
+            public override string ToString() {
                 return string.Format("MajorColor:{0}, MinorColor:{1}", majorColor.Name, minorColor.Name);
             }
         }
@@ -41,8 +39,7 @@ namespace TelCo.ColorCoder
         /// </summary>
         /// <param name="pairNumber">Pair number of the color to be fetched</param>
         /// <returns></returns>
-        public ColorPair GetColorFromPairNumber(int pairNumber)
-        {
+        public ColorPair GetColorFromPairNumber(int pairNumber) {
             // The function supports only 1 based index. Pair numbers valid are from 1 to 25
             if (pairNumber < 1 || pairNumber > (colorMapMinor.Length) * (colorMapMajor.Length))
                 throw new ArgumentOutOfRangeException(string.Format("Argument PairNumber:{0} is outside the allowed range", pairNumber));
@@ -57,23 +54,18 @@ namespace TelCo.ColorCoder
         /// </summary>
         /// <param name="pair">Color pair with major and minor color</param>
         /// <returns></returns>
-        public int GetPairNumberFromColor(ColorPair pair)
-        {
+        public int GetPairNumberFromColor(ColorPair pair) {
             int majorIndex = -1, minorIndex = -1;
             // Find the major color in the array and get the index
-            for (int i = 0; i < colorMapMajor.Length; i++)
-            {
-                if (colorMapMajor[i] == pair.majorColor)
-                {
+            for (int i = 0; i < colorMapMajor.Length; i++) {
+                if (colorMapMajor[i] == pair.majorColor) {
                     majorIndex = i; break;
                 }
             }
             
             // Find the minor color in the array and get the index
-            for (int i = 0; i < colorMapMinor.Length; i++)
-            {
-                if (colorMapMinor[i] == pair.minorColor)
-                {
+            for (int i = 0; i < colorMapMinor.Length; i++) {
+                if (colorMapMinor[i] == pair.minorColor) {
                     minorIndex = i; break;
                 }
             }
@@ -92,10 +84,8 @@ namespace TelCo.ColorCoder
         public void PrintColorPairManual()
         {
             int pairNumber = 1;
-            for (int i = 0; i < colorMapMajor.Length; i++)
-            {
-                for(int j = 0; j < colorMapMinor.Length; j++)
-                {           
+            for (int i = 0; i < colorMapMajor.Length; i++) {
+                for(int j = 0; j < colorMapMinor.Length; j++) {           
                     Console.WriteLine("Pair Number: {0}, Colors: {1}\n", pairNumber, new ColorPair() { majorColor = colorMapMajor[i], minorColor = colorMapMinor[j] });
                     pairNumber++;
                 }
