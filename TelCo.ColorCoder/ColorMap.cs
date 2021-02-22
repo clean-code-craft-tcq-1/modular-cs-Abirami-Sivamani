@@ -51,16 +51,14 @@ namespace TelCo.ColorCoder
             {
                 if (colorMapMajor[i] == pair.majorColor)
                 {
-                    majorIndex = i;
-                    break;
+                    majorIndex = i; break;
                 }
             }
             for (int i = 0; i < colorMapMinor.Length; i++)
             {
                 if (colorMapMinor[i] == pair.minorColor)
                 {
-                    minorIndex = i;
-                    break;
+                    minorIndex = i; break;
                 }
             }
             if (majorIndex == -1 || minorIndex == -1)
