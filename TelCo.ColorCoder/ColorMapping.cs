@@ -41,8 +41,7 @@ namespace TelCo.ColorCoder
             int zeroBasedPairNumber = pairNumber - 1;
             int majorIndex = zeroBasedPairNumber / colorMapMinor.Length;
             int minorIndex = zeroBasedPairNumber % colorMapMinor.Length;
-            ColorPair pair = new ColorPair() { majorColor = colorMapMajor[majorIndex], minorColor = colorMapMinor[minorIndex] };
-            return pair;
+            return new ColorPair() { majorColor = colorMapMajor[majorIndex], minorColor = colorMapMinor[minorIndex] };
         }
         public int GetPairNumberFromColor(ColorPair pair)
         {
