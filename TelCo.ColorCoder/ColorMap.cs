@@ -16,14 +16,16 @@ namespace TelCo.ColorCoder
         #endregion
 
         #region Constructor
-        static ColorMapping()
+        public ColorMapping()
         {
             colorMapMajor = new Color[] { Color.White, Color.Red, Color.Black, Color.Yellow, Color.Violet };
             colorMapMinor = new Color[] { Color.Blue, Color.Orange, Color.Green, Color.Brown, Color.SlateGray };
         }
         #endregion
 
-        #region DataType to hold major and minor colors in the color pair
+        /// <summary>
+        /// data type defined to hold the two colors of clor pair
+        /// </summary>
         internal class ColorPair
         {
             internal Color majorColor, minorColor;
@@ -32,7 +34,6 @@ namespace TelCo.ColorCoder
                 return string.Format("MajorColor:{0}, MinorColor:{1}", majorColor.Name, minorColor.Name);
             }
         }
-        #endregion
 
         #region Methods
         /// <summary>
