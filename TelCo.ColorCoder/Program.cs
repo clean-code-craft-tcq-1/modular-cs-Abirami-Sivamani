@@ -41,6 +41,9 @@ namespace TelCo.ColorCoder
             pairNumber = map.GetPairNumberFromColor(testPair2);
             Console.WriteLine("[In]Colors: {0}, [Out] PairNumber: {1}", testPair2, pairNumber);
             Debug.Assert(pairNumber == 6);
+            
+            Console.WriteLine("TELECOMMUNICATION COLOR CODE MANUAL");
+            map.PrintColorPairManual();
         }
     }
 }
