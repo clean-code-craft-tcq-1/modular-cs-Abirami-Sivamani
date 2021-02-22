@@ -60,15 +60,13 @@ namespace TelCo.ColorCoder
             for (int i = 0; i < colorMapMajor.Length; i++) {
                 if (colorMapMajor[i] == pair.majorColor) {
                     majorIndex = i; break;
-                }
-            }
+                } }
             
             // Find the minor color in the array and get the index
             for (int i = 0; i < colorMapMinor.Length; i++) {
                 if (colorMapMinor[i] == pair.minorColor) {
                     minorIndex = i; break;
-                }
-            }
+                } }
             
             // If colors can not be found throw an exception
             if (majorIndex == -1 || minorIndex == -1)
@@ -88,8 +86,7 @@ namespace TelCo.ColorCoder
                 for(int j = 0; j < colorMapMinor.Length; j++) {           
                     Console.WriteLine("Pair Number: {0}, Colors: {1}\n", pairNumber, new ColorPair() { majorColor = colorMapMajor[i], minorColor = colorMapMinor[j] });
                     pairNumber++;
-                }
-            }
+                } }
         }
         #endregion
     }
