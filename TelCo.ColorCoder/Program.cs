@@ -14,7 +14,7 @@ namespace TelCo.ColorCoder
         private static void Main(string[] args)
         {
             int pairNumber = 4;
-            ColorMapping map = new ColorMapping();
+            ColorMap map = new ColorMap();
             ColorPair testPair1 = map.GetColorFromPairNumber(pairNumber);
             Console.WriteLine("[In]Pair Number: {0},[Out] Colors: {1}\n", pairNumber, testPair1);
             Debug.Assert(testPair1.majorColor == Color.White);
