@@ -1,7 +1,7 @@
 using System;
 using System.Diagnostics;
 using System.Drawing;
-using static TelCo.ColorCoder.ColorMapping;
+using static TelCo.ColorCoder.ColorMap;
 
 namespace TelCo.ColorCoder
 {
