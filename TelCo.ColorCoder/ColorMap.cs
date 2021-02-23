@@ -6,19 +6,19 @@ namespace TelCo.ColorCoder
     /// <summary>
     /// This class provides the color coding and mapping of pair number to color and color to pair number.
     /// </summary>
-    class ColorMapping
+    class ColorMap
     {
         #region Private Variables
         /// <summary>
         /// Array of Major and Minor colors
         /// </summary>
-        private static Color[] colorMapMajor, colorMapMinor;
+        private static Color[] major, minor;
         #endregion
 
         #region Constructor
-        public ColorMapping() {
-            colorMapMajor = new Color[] { Color.White, Color.Red, Color.Black, Color.Yellow, Color.Violet };
-            colorMapMinor = new Color[] { Color.Blue, Color.Orange, Color.Green, Color.Brown, Color.SlateGray };
+        static ColorMap() {
+            major = new Color[] { Color.White, Color.Red, Color.Black, Color.Yellow, Color.Violet };
+            minor = new Color[] { Color.Blue, Color.Orange, Color.Green, Color.Brown, Color.SlateGray };
         }
         #endregion
 
@@ -41,12 +41,12 @@ namespace TelCo.ColorCoder
         /// <returns></returns>
         public ColorPair GetColorFromPairNumber(int pairNumber) {
             // The function supports only 1 based index. Pair numbers valid are from 1 to 25
-            if (pairNumber < 1 || pairNumber > (colorMapMinor.Length) * (colorMapMajor.Length))
+            if (pairNumber < 1 || pairNumber > (minor.Length) * (major.Length))
                 throw new ArgumentOutOfRangeException(string.Format("Argument PairNumber:{0} is outside the allowed range", pairNumber));
             
             // Find index of major and minor color from pair number
-            int zeroBasedPairNumber = pairNumber - 1, majorIndex = zeroBasedPairNumber / colorMapMinor.Length, minorIndex = zeroBasedPairNumber % colorMapMinor.Length;
-            return new ColorPair() { majorColor = colorMapMajor[majorIndex], minorColor = colorMapMinor[minorIndex] };
+            int zeroBasedPairNumber = pairNumber - 1, majorIndex = zeroBasedPairNumber / minor.Length, minorIndex = zeroBasedPairNumber % minor.Length;
+            return new ColorPair() { majorColor = major[majorIndex], minorColor = minor[minorIndex] };
         }
         
         /// <summary>
@@ -56,15 +56,16 @@ namespace TelCo.ColorCoder
         /// <returns></returns>
         public int GetPairNumberFromColor(ColorPair pair) {
             int majorIndex = -1, minorIndex = -1;
+            
             // Find the major color in the array and get the index
-            for (int i = 0; i < colorMapMajor.Length; i++) {
-                if (colorMapMajor[i] == pair.majorColor) {
+            for (int i = 0; i < major.Length; i++) {
+                if (major[i] == pair.majorColor) {
                     majorIndex = i; break;
                 } }
             
             // Find the minor color in the array and get the index
-            for (int i = 0; i < colorMapMinor.Length; i++) {
-                if (colorMapMinor[i] == pair.minorColor) {
+            for (int i = 0; i < minor.Length; i++) {
+                if (minor[i] == pair.minorColor) {
                     minorIndex = i; break;
                 } }
             
@@ -73,7 +74,7 @@ namespace TelCo.ColorCoder
                 throw new ArgumentException(string.Format("Unknown Colors: {0}", pair.ToString()));
             
             // (Note: +1 in compute is because pair number is 1 based, not zero)
-            return (majorIndex * colorMapMinor.Length) + (minorIndex + 1);
+            return (majorIndex * minor.Length) + (minorIndex + 1);
         }
         
         /// <summary>
@@ -82,9 +83,9 @@ namespace TelCo.ColorCoder
         public void PrintColorPairManual()
         {
             int pairNumber = 1;
-            for (int i = 0; i < colorMapMajor.Length; i++) {
-                for(int j = 0; j < colorMapMinor.Length; j++) {           
-                    Console.WriteLine("Pair Number: {0}, Colors: {1}\n", pairNumber, new ColorPair() { majorColor = colorMapMajor[i], minorColor = colorMapMinor[j] });
+            for (int i = 0; i < major.Length; i++) {
+                for(int j = 0; j < minor.Length; j++) {           
+                    Console.WriteLine("Pair Number: {0}, Colors: {1}\n", pairNumber, new ColorPair() { majorColor = major[i], minorColor = minor[j] });
                     pairNumber++;
                 } }
         }
