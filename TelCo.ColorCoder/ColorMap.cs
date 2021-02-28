@@ -28,7 +28,8 @@ namespace TelCo.ColorCoder
         /// </summary>
         /// <param name="pairNumber">Pair number of the color to be fetched</param>
         /// <returns></returns>
-        public ColorPair GetColorFromPairNumber(int pairNumber) {
+        public ColorPair GetColorFromPairNumber(int pairNumber) 
+        {
             // The function supports only 1 based index. Pair numbers valid are from 1 to 25
             if (pairNumber < 1 || pairNumber > (minor.Length) * (major.Length))
                 throw new ArgumentOutOfRangeException(string.Format("Argument PairNumber:{0} is outside the allowed range", pairNumber));
@@ -43,7 +44,8 @@ namespace TelCo.ColorCoder
         /// </summary>
         /// <param name="pair">Color pair with major and minor color</param>
         /// <returns></returns>
-        public int GetPairNumberFromColor(ColorPair pair) {
+        public int GetPairNumberFromColor(ColorPair pair) 
+        {
             int majorIndex = this.FindMajorColorIndex(pair) , minorIndex = this.FindMinorColorIndex(pair);
                  
             // If colors can not be found throw an exception
@@ -62,8 +64,7 @@ namespace TelCo.ColorCoder
         private int FindMajorColorIndex(ColorPair pair)
         {
             int majorIndex = -1;
-            for (int i = 0; i < major.Length; i++)
-            {
+            for (int i = 0; i < major.Length; i++) {
                 if (major[i] == pair.majorColor)
                 {
                     majorIndex = i; break;
@@ -80,9 +81,8 @@ namespace TelCo.ColorCoder
         private int FindMinorColorIndex(ColorPair pair)
         {
             int minorIndex = -1;
-            for (int i = 0; i < minor.Length; i++)
-            {
-                if (minor[i] == pair.minorColor)
+            for (int i = 0; i < minor.Length; i++) {
+                if (minor[i] == pair.minorColor) 
                 {
                     minorIndex = i; break;
                 }
