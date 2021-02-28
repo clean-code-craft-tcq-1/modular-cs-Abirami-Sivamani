@@ -48,12 +48,18 @@ namespace TelCo.ColorCoder
             Console.WriteLine("TELECOMMUNICATION COLOR CODE MANUAL");
             pairs.PrintColorPairManual();
         }
-
+        
+        /// <summary>
+        /// Display the result of GetColorFromPairNumber output
+        /// </summary>
         private static void DisplayResultOfGetColorFromPairNumber(int pairNumber, ColorPair testPair)
         {
             Console.WriteLine("[In]Pair Number: {0},[Out] Colors: {1}\n", pairNumber, testPair);
         }
-
+        
+        /// <summary>
+        /// Display the result of GetPairNumberFromColor output
+        /// </summary>
         private static void DisplayResultOfGetPairNumberFromColor(int pairNumber, ColorPair testPair)
         {
             Console.WriteLine("[In]Colors: {0}, [Out] PairNumber: {1}\n", testPair, pairNumber);
