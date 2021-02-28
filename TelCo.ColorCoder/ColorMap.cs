@@ -8,30 +8,19 @@ namespace TelCo.ColorCoder
     /// </summary>
     class ColorMap
     {
-        #region Private Variables
+        #region Variables
         /// <summary>
         /// Array of Major and Minor colors
         /// </summary>
-        private static Color[] major, minor;
+        public Color[] major, minor;
         #endregion
 
         #region Constructor
-        static ColorMap() {
+        public ColorMap() {
             major = new Color[] { Color.White, Color.Red, Color.Black, Color.Yellow, Color.Violet };
             minor = new Color[] { Color.Blue, Color.Orange, Color.Green, Color.Brown, Color.SlateGray };
         }
         #endregion
-
-        /// <summary>
-        /// data type defined to hold the two colors of clor pair
-        /// </summary>
-        internal class ColorPair
-        {
-            internal Color majorColor, minorColor;
-            public override string ToString() {
-                return string.Format("MajorColor:{0}, MinorColor:{1}", majorColor.Name, minorColor.Name);
-            }
-        }
 
         #region Methods
         /// <summary>
@@ -55,20 +44,8 @@ namespace TelCo.ColorCoder
         /// <param name="pair">Color pair with major and minor color</param>
         /// <returns></returns>
         public int GetPairNumberFromColor(ColorPair pair) {
-            int majorIndex = -1, minorIndex = -1;
-            
-            // Find the major color in the array and get the index
-            for (int i = 0; i < major.Length; i++) {
-                if (major[i] == pair.majorColor) {
-                    majorIndex = i; break;
-                } }
-            
-            // Find the minor color in the array and get the index
-            for (int i = 0; i < minor.Length; i++) {
-                if (minor[i] == pair.minorColor) {
-                    minorIndex = i; break;
-                } }
-            
+            int majorIndex = this.FindMajorColorIndex(pair) , minorIndex = this.FindMinorColorIndex(pair);
+                 
             // If colors can not be found throw an exception
             if (majorIndex == -1 || minorIndex == -1)
                 throw new ArgumentException(string.Format("Unknown Colors: {0}", pair.ToString()));
@@ -76,19 +53,43 @@ namespace TelCo.ColorCoder
             // (Note: +1 in compute is because pair number is 1 based, not zero)
             return (majorIndex * minor.Length) + (minorIndex + 1);
         }
-        
+
         /// <summary>
-        /// Print the Color pair with Major and Minor colors and corresponding pair number
+        /// Find the major color in the array and get the index
         /// </summary>
-        public void PrintColorPairManual()
+        /// <param name="pair"></param>
+        /// <returns></returns>
+        private int FindMajorColorIndex(ColorPair pair)
         {
-            int pairNumber = 1;
-            for (int i = 0; i < major.Length; i++) {
-                for(int j = 0; j < minor.Length; j++) {           
-                    Console.WriteLine("Pair Number: {0}, Colors: {1}\n", pairNumber, new ColorPair() { majorColor = major[i], minorColor = minor[j] });
-                    pairNumber++;
-                } }
+            int majorIndex = -1;
+            for (int i = 0; i < major.Length; i++)
+            {
+                if (major[i] == pair.majorColor)
+                {
+                    majorIndex = i; break;
+                }
+            }
+            return majorIndex;
         }
+
+        /// <summary>
+        /// Find the minor color in the array and get the index
+        /// </summary>
+        /// <param name="pair"></param>
+        /// <returns></returns>
+        private int FindMinorColorIndex(ColorPair pair)
+        {
+            int minorIndex = -1;
+            for (int i = 0; i < minor.Length; i++)
+            {
+                if (minor[i] == pair.minorColor)
+                {
+                    minorIndex = i; break;
+                }
+            }
+            return minorIndex;
+        }
+
         #endregion
     }
 }
